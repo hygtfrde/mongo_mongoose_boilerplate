@@ -1,13 +1,20 @@
 require('dotenv').config();
 var mongoose = require('mongoose'); 
 
-// var util= require('util');
-// var encoder = new util.TextEncoder('utf-8');
-
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+const Schema = mongoose.Schema;
 
+//--------------------------------------------------------------------
+//---------- SCHEMA
+const personSchema = new Schema({
+  name: { type: String, required: true },
+  age: Number,
+  favoriteFoods: [String]
+});
+//---------- MODEL
+const Person = mongoose.model("Person", personSchema);
 
-let Person;
+//--------------------------------------------------------------------
 
 const createAndSavePerson = (done) => {
   done(null /*, data*/);
