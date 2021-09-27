@@ -1,4 +1,10 @@
 require('dotenv').config();
+var mongoose = require('mongoose'); 
+
+// var util= require('util');
+// var encoder = new util.TextEncoder('utf-8');
+
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 let Person;
