@@ -50,7 +50,7 @@ const createManyPeople = (arrayOfPeople, done) => {
       console.error(err);
       return err; 
     } else {
-      done(null, (data); 
+      done(null, data); 
     }
   })
 };
