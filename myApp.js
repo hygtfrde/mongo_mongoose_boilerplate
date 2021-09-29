@@ -45,7 +45,9 @@ const createAndSavePerson = (done) => {
 
 const arrayOfPeople = [
   {name: 'Bob', age: 22, favoriteFoods: ['beef','onions']},
-  {name: 'Mary', age: 42, favoriteFoods: ['squash','peas']}
+  {name: 'Mary', age: 42, favoriteFoods: ['squash','peas', 'hamburger']},
+  {name: 'Charlie', age: 32, favoriteFoods: ['ham','carrots', 'hamburger']},
+  {name: 'Chistine', age: 26, favoriteFoods: ['bread','butter']}
 ]; 
 
 const createManyPeople = (arrayOfPeople, done) => {
@@ -96,12 +98,21 @@ const findPersonById = (personId, done) => {
 };
 
 //--------------------------------------------------------------------
-//----------
+//---------- FIND + EDIT + SAVE 
 
 const findEditThenSave = (personId, done) => {
-  const foodToAdd = "hamburger";
-
-  done(null /*, data*/);
+  const foodToAdd = 'hamburger';
+  // 1) findById
+  Person.findById(personId, (err, person) => {
+    if(err) return console.log(err); 
+  // 2) Edit/Update returned object
+    person.favoriteFoods.push(foodToAdd);
+  // 3) Save object with updated property 
+    person.save((err, updatedPerson) => {
+      if(err) return console.log(err);
+      done(null, updatedPerson)
+    })
+  })
 };
 
 //--------------------------------------------------------------------
