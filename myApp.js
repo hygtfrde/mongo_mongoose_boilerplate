@@ -171,12 +171,22 @@ const removeManyPeople = (done) => {
 };
 
 //--------------------------------------------------------------------
-//----------
+//---------- CHAIN QUERIES: FIND + SORT + LIMIT + SELECT + EXEC
 
 const queryChain = (done) => {
   const foodToSearch = "burrito";
 
   done(null /*, data*/);
+};const queryChain = function(done) {
+  var foodToSearch = "burrito";
+  Person.find({favoriteFoods:foodToSearch}).sort({name : 1})
+  .limit(2).select({age:0})
+  .exec((err, data) => {
+     if(err){
+       done(err);
+     }
+    done(null, data);
+  })
 };
 
 
