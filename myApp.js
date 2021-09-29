@@ -16,6 +16,10 @@ const personSchema = new Schema({
 const Person = mongoose.model("Person", personSchema);
 
 //--------------------------------------------------------------------
+// Callback functions take the ERROR FIRST, then the DATA if successful 
+//--------------------------------------------------------------------
+
+//--------------------------------------------------------------------
 //---------- CREATE AND SAVE
 
 const createAndSavePerson = (done) => {
@@ -80,10 +84,15 @@ const findOneByFood = function(food, done) {
 };
 
 //--------------------------------------------------------------------
-//----------
+//---------- FIND BY _ID
 
 const findPersonById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findById(personId, (err, data) => {
+    if(err) {
+      return console.log(err);
+    }
+    done(null, data); 
+  })
 };
 
 //--------------------------------------------------------------------
