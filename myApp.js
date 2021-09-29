@@ -116,12 +116,25 @@ const findEditThenSave = (personId, done) => {
 };
 
 //--------------------------------------------------------------------
-//----------
+//---------- FIND AND UPDATE 
 
 const findAndUpdate = (personName, done) => {
+  // 1) document to find {name: personName}
+  // 2) field to change {age: ageToSet}
+  // 3) return updated document with {new: true} 
   const ageToSet = 20;
 
-  done(null /*, data*/);
+  Person.findOneAndUpdate(
+    {name: personName}, 
+    {age: ageToSet}, 
+    {new: true}, 
+    (err, updatedDoc) => {
+      if(err) {
+        return console.log(err);
+      }
+      done(null, updatedDoc);
+    }
+  )
 };
 
 //--------------------------------------------------------------------
