@@ -153,12 +153,21 @@ var removeById = function(personId, done) {
 };
 
 //--------------------------------------------------------------------
-//----------
+//---------- REMOVE ALL WHERE 
+
+/*
+[MONGODB DRIVER] Warning: collection.remove is deprecated. 
+Use deleteOne, deleteMany, or bulkWrite instead.
+*/
 
 const removeManyPeople = (done) => {
   const nameToRemove = "Mary";
-
-  done(null /*, data*/);
+  Person.remove({name: nameToRemove}, (err, response) => {
+    if(err) {
+      return console.log(err);
+    }
+    done(null, response);
+  })
 };
 
 //--------------------------------------------------------------------
